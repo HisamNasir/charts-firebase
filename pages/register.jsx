@@ -200,7 +200,7 @@ const Register = () => {
           {loading ? (
             <div className="flex items-center justify-center">
               {loadingText}
-              <ClipLoader color={"#ffffff"} loading={true} css={override} size={25} />
+              <ClipLoader color={"#ffffff"} loading={true} css={override} size={20} />
             </div>
           ) : (
             "Sign up"
