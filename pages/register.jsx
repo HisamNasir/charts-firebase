@@ -35,6 +35,8 @@ const Register = () => {
       const imageUrl = URL.createObjectURL(file);
       setSelectedFile(file);
       setSelectedImageUrl(imageUrl);
+      const fileExtension = file.name.split('.').pop();
+      setProfilePicture(file);
     }
   };
 
@@ -56,29 +58,23 @@ const Register = () => {
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on("state_changed", (snapshot) => {
-        // Handle upload progress if needed
       });
 
       uploadTask.then(async () => {
         try {
           const downloadURL = await getDownloadURL(storageRef);
-
           await updateProfile(res.user, {
             displayName,
             photoURL: downloadURL,
           });
-
           await setDoc(doc(db, "users", res.user.uid), {
             uid: res.user.uid,
             displayName,
             email,
             photoURL: downloadURL,
           });
-
-          await setDoc(doc(db, "userChats", res.user.uid), {});
-
+          await setDoc(doc(db, "userImages", res.user.uid), {});
           toast.success("Signup successful!", { position: "bottom-right", autoClose: 3000 });
-
           setTimeout(() => {
             router.push("/login");
           }, 3000);
