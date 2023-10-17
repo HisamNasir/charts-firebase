@@ -7,7 +7,7 @@ import React from "react";
 const Stats = () => {
   return (
     <Layout>
-      <div className=" flex flex-col p-8 gap-4 mb-4">
+      <div className=" flex flex-col p-8 min-w-max gap-4 mb-4">
         <div className="flex items-center   rounded-xl bg-blue-100 dark:bg-gray-800">
           <div className="flex flex-col h-full w-full  lg: gap-2 p-4 ">
             <GalleryPieChart />

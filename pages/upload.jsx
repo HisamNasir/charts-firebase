@@ -71,6 +71,7 @@ const Upload = () => {
       <div className="p-4 flex flex-col justify-center h-full  min-w-max">
         <div className="flex justify-start">
           <a
+          disabled={uploading}
             href="/home"
             className="flex items-center gap-4 mb-3  hover:bg-blue-800 transition-colors duration-200 bg-blue-500 text-white font-semibold p-2 px-4 rounded-xl my-4 disabled:opacity-30"
           >
@@ -80,14 +81,15 @@ const Upload = () => {
         <div className="bg-blue-100 dark:bg-gray-800 p-4 rounded-xl">
           <h1 className="text-3xl font-semibold mb-4">Image Upload</h1>
           <label
+          disabled={uploading}
             htmlFor="image-upload"
-            className="cursor-pointer obj flex w-full border border-gray-500 rounded-xl items-center justify-center h-[35vh]"
+            className="cursor-pointer disabled:cursor-not-allowed obj flex w-full border border-gray-500 rounded-xl items-center justify-center h-[35vh]"
           >
             {image ? (
               <img
                 src={URL.createObjectURL(image)}
                 alt="Selected Image"
-                className="h-60 w-60  object-cover"
+                className="h-60 w-60  object-cover disabled:opacity-30"
               />
             ) : (
               <FaImage className="text-6xl" />
@@ -95,6 +97,7 @@ const Upload = () => {
           </label>
 
           <input
+          disabled={uploading}
             type="file"
             id="image-upload"
             className="hidden"

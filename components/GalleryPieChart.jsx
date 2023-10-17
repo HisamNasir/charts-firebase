@@ -78,8 +78,8 @@ const GalleryPieChart = () => {
   };
 
   return (
-    <div className="p-4 w-full">
-      <div className="bg-blue-100 dark:bg-gray-800 w-full p-4 rounded-xl">
+    <div className="p-4 w-full min-w-max">
+      <div className=" w-full p-4 rounded-xl">
         <h1 className="text-3xl font-semibold mb-4 text-center">
           Image Gallery
         </h1>
@@ -89,13 +89,13 @@ const GalleryPieChart = () => {
         {imageData.length === 0 ? (
           <p>No images found.</p>
         ) : (
-          <div className="w-full">
+          <div className="w-full min-w-max">
             <div className="p-4 border border-gray-500 rounded-xl mt-4">
               <div className="p-4">
                 <h2 className="text-2xl font-semibold text-center my-4">
                   Image Data
                 </h2>
-                <div className="">
+                <div className=" min-w-max">
                   <table className="table-auto w-full">
                     <thead>
                       <tr className="bg-blue-100 dark:bg-gray-700">
@@ -104,7 +104,7 @@ const GalleryPieChart = () => {
                         <th className="px-4 py-2">Actions</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className=" overflow-y-scroll">
                       {imageData.map((data, index) => (
                         <tr
                           key={index}
