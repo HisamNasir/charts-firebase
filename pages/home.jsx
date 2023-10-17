@@ -1,86 +1,79 @@
-import React, { useState, useEffect } from "react";
-import { db, storage } from "../firebase-config";
-import {
-  doc,
-  setDoc,
-  collection,
-  getDocs,
-  orderBy,
-  query,
-} from "firebase/firestore";
-import Layout from "@/components/Layout";
-import Category from "@/components/ImageCategory";
-import DisplayImages from "@/components/DisplayImages";
-import ImageCategoryPieChart from "@/components/ImageCategoryPieChart";
-import ImageSizeChart from "@/components/ImageCounter";
-import ImageCounter from "@/components/ImageCounter";
-import { Chart as ChartJS } from 'chart.js/auto';
-
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import Layout from '@/components/Layout';
+import { db, storage } from '../firebase-config';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { FaUpload } from 'react-icons/fa';
 const Home = () => {
-
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploadedImages, setUploadedImages] = useState([]); // Define the uploadedImages state
-
+  const { currentUser } = useContext(AuthContext);
+  const [userImages, setUserImages] = useState([]);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const imageRef = collection(db, "userImages");
-      const imageQuery = query(imageRef, orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(imageQuery);
-      const images = [];
+    if (currentUser) {
+      const userImagesCollection = collection(db, 'ImageCategory', currentUser.uid, 'UserImages');
+      const q = query(userImagesCollection, where('imageOwner', '==', currentUser.uid));
 
-      snapshot.forEach((doc) => {
-        images.push(doc.data());
-      });
-      setUploadedImages(images);
-    };
-    fetchImages();
-  }, []);
+      getDocs(q)
+        .then(async (querySnapshot) => {
+          const images = [];
+
+          for (const doc of querySnapshot.docs) {
+            const imageData = doc.data();
+            const imageUrl = await getDownloadURL(ref(storage, imageData.imageUrl));
+
+            images.push({
+              ...imageData,
+              imageUrl,
+            });
+          }
+
+          setUserImages(images);
+        })
+        .catch((error) => {
+          console.error('Error getting images:', error);
+        });
+    }
+  }, [currentUser]);
+
   return (
     <Layout>
-      <div className="p-4 w-screen">
-        <div className=" border-gray-200 rounded-lg dark:border-gray-700">
-          <div className=" flex overflow-x-scroll py-5 gap-4 mb-4">
-            <div className="flex items-center justify-center rounded bg-gray-50 dark:bg-gray-800">
-              <div className="flex flex-col lg:text-center gap-2 p-4 text-gray-400 dark:text-gray-500">
-                <ImageCategoryPieChart/>
-                Image Categories
-              </div>
+      <div className='p-4 '>
+        <div className='bg-blue-100 dark:bg-gray-800 w-full p-4 rounded-xl'>
+          <h1 className='text-3xl font-semibold mb-4'>Gallery</h1>
+          {userImages.length === 0 ? (
+            <p>No images found.</p>
+          ) : (
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+              {userImages.map((image, index) => (
+                <div key={index} className='relative'>
+                  <img src={image.imageUrl} alt='Please wait..' className='w-full h-40 object-cover rounded-lg' />
+                </div>
+              ))}
             </div>
-
-            <div className="flex items-center justify-center rounded bg-gray-50 dark:bg-gray-800 w-full">
-              <div className="flex flex-col lg:text-center gap-2 p-4 w-full text-gray-400 dark:text-gray-500">
-
-                <ImageCounter/>
-
-              </div>
-            </div>
-
-
-          </div>
-
-
-
-
-
-
-
-
-
-         
-            <Category/>
-
-
-            <div className="flex items-center justify-center rounded bg-gray-50  p-8 dark:bg-gray-800">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-            <DisplayImages images={uploadedImages}  />
-</div>
-            </div>
-
-
+          )}
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <a
+        href="/upload"
+        className="fixed flex items-center gap-4 hover:bg-blue-800 transition-colors duration-200 bottom-5 p-4 rounded-2xl bg-blue-500 text-white font-semibold text-lg right-5 z-10"
+      >
+        <FaUpload /> Upload Image
+      </a>
     </Layout>
   );
 };

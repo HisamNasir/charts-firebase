@@ -4,7 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
-const BarChart = () => {
+const ImageCounter = () => {
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -74,4 +74,4 @@ const BarChart = () => {
   );
 };
 
-export default BarChart;
+export default ImageCounter;
