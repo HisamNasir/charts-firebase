@@ -16,8 +16,6 @@ const DisplayImages = ({ images }) => {
         </div>
       </div>
     ))}
-    
-    
     </>
   );
 };

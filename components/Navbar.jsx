@@ -1,15 +1,13 @@
-import Link from 'next/link';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import React, { useState, useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { FaSignOutAlt } from "react-icons/fa";
-
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
 import DarkModButton from "./DarkModButton";
-
 const Navbar = () => {
   const { currentUser, signOutUser } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
@@ -25,21 +23,25 @@ const Navbar = () => {
         console.error("Error fetching users:", err);
       }
     };
-
     getUsers();
   }, []);
-
   return (
     <nav className="bg-blue-700 font-semibold p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className='space-x-4'>
+        <div className="space-x-4">
           <Link href="/home" className="text-white hover:border p-3 rounded-xl">
             Gallery
           </Link>
-          <Link href="/stats" className="text-white hover:border p-3 rounded-xl">
+          <Link
+            href="/stats"
+            className="text-white hover:border p-3 rounded-xl"
+          >
             Stats
           </Link>
-          <Link href="/settings" className="text-white hover:border p-3 rounded-xl">
+          <Link
+            href="/settings"
+            className="text-white hover:border p-3 rounded-xl"
+          >
             Settings
           </Link>
         </div>

@@ -1,9 +1,8 @@
-// seedFirestore.js
-import { db } from "@/firebase-config"; // Import your Firebase configuration
+
+import { db } from "@/firebase-config"; 
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
 const initializeCategories = async () => {
-  // Define your dummy categories and subcategories here
   const dummyCategories = [
     {
       name: "Category1",
@@ -13,13 +12,9 @@ const initializeCategories = async () => {
       name: "Category2",
       subcategories: ["Subcategory3", "Subcategory4"],
     },
-    // Add more categories and subcategories as needed
   ];
-
-  // Iterate through the dummy categories and add them to Firestore
   for (const category of dummyCategories) {
     const categoryRef = doc(db, "ImageCategory", category.name);
-
     await setDoc(categoryRef, {
       Subcategories: category.subcategories,
     });
@@ -27,15 +22,11 @@ const initializeCategories = async () => {
     console.log(`Category "${category.name}" and subcategories added.`);
   }
 };
-
-
 import React from "react";
-
 const InitializeCategories = () => {
   const handleInitialize = () => {
     initializeCategories();
   };
-
   return (
     <div>
       <h2>Initialize Categories</h2>

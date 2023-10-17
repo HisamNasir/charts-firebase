@@ -21,7 +21,6 @@ const Settings = () => {
         try {
           const userProfileDocRef = doc(db, "UserProfileInfo", currentUser.uid);
           const userProfileDocSnapshot = await getDoc(userProfileDocRef);
-
           if (userProfileDocSnapshot.exists()) {
             const userData = userProfileDocSnapshot.data();
             setUserProfile(userData);
@@ -34,7 +33,6 @@ const Settings = () => {
         }
       };
       fetchUserProfile();
-      // Update time
       const intervalId = setInterval(() => {
         const now = new Date();
         setCurrentDate(now.toLocaleString());
@@ -45,14 +43,11 @@ const Settings = () => {
       };
     }
   }, [currentUser]);
-
   const updateProfile = async () => {
     if (!currentUser || !userProfile) {
       return;
     }
-
     try {
-      // Update the Name, Age, and Gender in Firestore
       const userProfileDocRef = doc(db, "UserProfileInfo", currentUser.uid);
       await updateDoc(userProfileDocRef, {
         Name: nameInput,
@@ -60,12 +55,9 @@ const Settings = () => {
         Gender: genderInput,
         LastUpdated: serverTimestamp(),
       });
-
       setIsEditingName(false);
       setIsEditingAge(false);
       setIsEditingGender(false);
-
-      // Refresh the user's profile
       const userProfileDocSnapshot = await getDoc(userProfileDocRef);
       const userData = userProfileDocSnapshot.data();
       setUserProfile(userData);

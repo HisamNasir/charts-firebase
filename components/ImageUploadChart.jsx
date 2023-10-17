@@ -19,35 +19,24 @@ const ImageUploadChart = () => {
         date.setDate(date.getDate() - i);
 
         const dateString = date.toISOString().split('T')[0];
-
-        // Build the collection path
         const userImagesCollection = collection(db, 'ImageCategory', 'UserImages', 'UserImages');
-
         const q = query(userImagesCollection, where('timestamp', '>=', dateString));
-
         const querySnapshot = await getDocs(q);
-
         labels.push(dateString);
         data.push(querySnapshot.size);
       }
-
       setUploadData({
         labels: labels.reverse(),
         data: data.reverse(),
       });
     };
-
     fetchData();
   }, []);
-
   useEffect(() => {
     const ctx = document.getElementById('imageUploadChart').getContext('2d');
-
-    // Destroy existing chart if it exists
     if (window.myChart) {
       window.myChart.destroy();
     }
-
     window.myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -71,7 +60,6 @@ const ImageUploadChart = () => {
       },
     });
   }, [uploadData]);
-
   return (
     <div className='p-4 bg-blue-100 dark:bg-gray-800 w-full rounded-xl'>
       <h1 className='text-3xl font-semibold mb-4'>Image Uploads in the Last 7 Days</h1>
@@ -79,5 +67,4 @@ const ImageUploadChart = () => {
     </div>
   );
 };
-
 export default ImageUploadChart;
