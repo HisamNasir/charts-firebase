@@ -88,7 +88,7 @@ const Settings = () => {
             </div>
           </div>
           <div className="flex flex-wrap -m-3">
-            <div id="section1" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div id="section1" className="p-2 xl:w-1/3 md:w-1/2 w-full">
               <div className="h-full p-6 rounded-lg border-[1px]  border-blue-300 flex flex-col relative overflow-hidden">
                 <h2 className="text-sm trackingWidest title-font mb-1 font-medium">
                   Profile Picture
@@ -103,7 +103,7 @@ const Settings = () => {
                 </div>
               </div>
             </div>
-            <div id="section2" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div id="section2" className="p-2 xl:w-1/3 md:w-1/2 w-full">
               <div className="h-full p-6 rounded-lg border-[1px] border-blue-300 flex flex-col relative overflow-hidden">
                 <h2 className="text-sm trackingWidest title-font mb-1 font-medium">
                   User Info
@@ -201,14 +201,14 @@ const Settings = () => {
                 </div>
               </div>
             </div>
-            <div id="section3" className="p-4 xl:w-1/3 md:w-1/2 w-full">
+            <div id="section3" className="p-2 xl:w-1/3 md:w-1/2 w-full">
               <div className="h-full p-6 rounded-lg border-[1px] border-blue-300 flex flex-col relative overflow-hidden">
                 <h2 className="text-sm trackingWidest title-font mb-1 font-medium">
                   Data
                 </h2>
-                <div className="text-2xl  leading-none  items-center pb-4 mb-4 border-b border-gray-200">
+                <div className="text-lg  leading-none  items-center pb-4 mb-4 border-b border-gray-200">
                   Time and Date:
-                  <span>{currentDate}</span>
+                  <span className="text-blue-500 text-sm">{currentDate}</span>
                 </div>
 
                 <div className="text-xs text-gray-500 mt-3">

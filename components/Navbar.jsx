@@ -26,7 +26,7 @@ const Navbar = () => {
     getUsers();
   }, []);
   return (
-    <nav className="bg-blue-700 font-semibold p-4">
+    <nav className="bg-blue-700 dark:bg-blue-900 font-semibold p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="space-x-4">
           <Link href="/home" className="text-white hover:border p-3 rounded-xl">

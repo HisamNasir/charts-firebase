@@ -5,8 +5,11 @@ const Layout = (props) => {
   return (
     <div className=''>
       <NavBar/>
-      <div className='h-[calc(100vh-62px)]'>
+      <div className='flex justify-center'>
+      <div className='h-[calc(100vh-62px)]  max-w-7xl'>
       {props.children}
+
+      </div>
 
       </div>
     </div>

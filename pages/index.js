@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <>
-      <main id="__next">{currentUser ? <Home /> : null}</main>
+      <main className="" id="__next">{currentUser ? <Home /> : null}</main>
     </>
   );
 }

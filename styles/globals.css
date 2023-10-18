@@ -3,6 +3,6 @@
 @tailwind utilities;
 @layer base{
   body {
-      @apply dark:bg-slate-900 bg-slate-100
+      @apply dark:bg-gray-900 bg-gray-300 transition-colors duration-700
   }
 }

@@ -78,92 +78,100 @@ const GalleryPieChart = () => {
   };
 
   return (
-    <div className="p-4 w-full min-w-max">
-      <div className=" w-full p-4 rounded-xl">
-        <h1 className="text-3xl font-semibold mb-4 text-center">
-          Image Gallery
-        </h1>
-        <p className=" text-center opacity-60">
-          Images Uploaded Today: {imagesUploadedToday}
-        </p>
-        {imageData.length === 0 ? (
-          <p>No images found.</p>
-        ) : (
-          <div className="w-full min-w-max">
-            <div className="p-4 border border-gray-500 rounded-xl mt-4">
-              <div className="p-4">
-                <h2 className="text-2xl font-semibold text-center my-4">
-                  Image Data
-                </h2>
-                <div className=" min-w-max">
-                  <table className="table-auto w-full">
-                    <thead>
-                      <tr className="bg-blue-100 dark:bg-gray-700">
-                        <th className="px-4 py-2">Timestamp</th>
-                        <th className="px-4 py-2">Category</th>
-                        <th className="px-4 py-2">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className=" overflow-y-scroll">
-                      {imageData.map((data, index) => (
-                        <tr
-                          key={index}
-                          className={
-                            index % 2 === 0
-                              ? "bg-gray-300 bg-opacity-20"
-                              : "bg-gray-200 bg-opacity-20"
-                          }
-                        >
-                          <td className="px-4 py-2">{data.timestamp}</td>
-                          <td className="px-4 py-2">{data.imageCategory}</td>
-                          <td className="px-4 py-2">
-                            <button
-                              className="text-blue-500 hover:text-blue-700 cursor-pointer"
-                              onClick={() => openImageInNewTab(data.imageUrl)}
+    <div className="flex items-center sm:w-full rounded-xl  bg-blue-100 min-h-max dark:bg-gray-800">
+      <div className="flex flex-col h-full w-full lg:gap-2">
+        <div className=" w-full min-w-max">
+          <div className=" w-full rounded-xl">
+            <h1 className="text-3xl font-semibold mb-4 text-center">
+              Image Gallery
+            </h1>
+            <p className=" text-center opacity-60">
+              Images Uploaded Today: {imagesUploadedToday}
+            </p>
+            {imageData.length === 0 ? (
+              <p>No images found.</p>
+            ) : (
+              <div className="w-full min-w-max">
+                <div className="p-4 border-t border-gray-500 rounded-xl mt-4">
+                  <div className="">
+                    <h2 className="text-2xl font-semibold text-center my-4">
+                      Image Data
+                    </h2>
+                    <div className=" min-w-max">
+                      <table className="table-auto w-full">
+                        <thead>
+                          <tr className="bg-blue-100 dark:bg-gray-700">
+                            <th className="px-2 text-left py-2">Timestamp</th>
+                            <th className="px-2 text-left py-2">Category</th>
+                            <th className="px-2 text-left py-2">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody className=" overflow-y-scroll">
+                          {imageData.map((data, index) => (
+                            <tr
+                              key={index}
+                              className={
+                                index % 2 === 0
+                                  ? "bg-gray-300 bg-opacity-20"
+                                  : "bg-gray-200 bg-opacity-20"
+                              }
                             >
-                              View Image
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                              <td className="p-2">{data.timestamp}</td>
+                              <td className="p-2">
+                                {data.imageCategory}
+                              </td>
+                              <td className="px-4 py-2">
+                                <button
+                                  className="text-blue-500 hover:text-blue-700 cursor-pointer"
+                                  onClick={() =>
+                                    openImageInNewTab(data.imageUrl)
+                                  }
+                                >
+                                  View Image
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
 
-              <div className="p-4 border border-gray-500 rounded-xl mt-4">
-                <h2 className="text-2xl font-semibold text-center my-4">
-                  Category Counts
-                </h2>
-                <div className="">
-                  <table className="table-auto w-full">
-                    <thead>
-                      <tr className="bg-blue-100 dark:bg-gray-700">
-                        <th className="px-4 py-2">Category</th>
-                        <th className="px-4 py-2">Count</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {categoryData.map((category, index) => (
-                        <tr
-                          key={index}
-                          className={
-                            index % 2 === 0
-                              ? "bg-gray-300 bg-opacity-20"
-                              : "bg-gray-200 bg-opacity-20"
-                          }
-                        >
-                          <td className="px-4 py-2">{category.category}</td>
-                          <td className="px-4 py-2">{category.count}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <div className=" border-t border-r border-l border-gray-500 rounded-t-xl mt-4">
+                    <h2 className="text-2xl font-semibold text-center my-4">
+                      Category Counts
+                    </h2>
+                    <div className="">
+                      <table className="table-auto w-full">
+                        <thead>
+                          <tr className="bg-blue-100 dark:bg-gray-700">
+                            <th className="px-4 text-left py-2">Category</th>
+                            <th className="px-4 text-left py-2">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {categoryData.map((category, index) => (
+                            <tr
+                              key={index}
+                              className={
+                                index % 2 === 0
+                                  ? "bg-gray-300 bg-opacity-20"
+                                  : "bg-gray-200 bg-opacity-20"
+                              }
+                            >
+                              <td className="px-4 py-2">{category.category}</td>
+                              <td className="px-4 py-2">{category.count}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
