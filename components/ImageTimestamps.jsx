@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import { db } from "../firebase-config";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FaUpload } from "react-icons/fa";
-
+import Chart from 'chart.js/auto';
 const ImageTableCharts = () => {
   const { currentUser } = useContext(AuthContext);
   const [imageData, setImageData] = useState([]);
