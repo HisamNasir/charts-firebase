@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { FaHandPointRight, FaEdit, FaSave } from "react-icons/fa";
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase-config";
+import { Link } from "react-router-dom";
 
 const Settings = () => {
   const { currentUser } = useContext(AuthContext);
@@ -70,7 +71,7 @@ const Settings = () => {
   };
 
   if (!currentUser || !userProfile) {
-    return <div>Loading...</div>;
+    return <a href="/">Login</a>;
   }
 
   const { Email, Name, ID, ProfilePictureURL, Age, Gender } = userProfile;

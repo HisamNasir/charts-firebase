@@ -5,8 +5,12 @@ const Layout = (props) => {
   return (
     <div className=''>
       <NavBar/>
-      <div className='h-[calc(100vh-62px)] mx-auto container'>
+      <div className='mx-auto container'>
+      <div className='h-[calc(100vh-62px)]  pt-[62px]'>
       {props.children}
+
+      </div>
+
       </div>
     </div>
   );
