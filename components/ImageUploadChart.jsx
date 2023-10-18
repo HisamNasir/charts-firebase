@@ -99,7 +99,6 @@ const ImageUploadChart = () => {
     }
 
     setUploadData({
-      
       labels: labels,
       data: demoData,
     });
@@ -147,7 +146,7 @@ const ImageUploadChart = () => {
       <div className="flex flex-col h-full w-full lg: gap-2 font-semibold md:text-xl">
         <div className="p-4 h-full bg-blue-100 dark:bg-gray-800 w-full rounded-xl">
           <h1 className="text-2xl font-semibold text-center mb-4">
-            Image Uploads in the Last 7 Days
+            Dummy
           </h1>
           <canvas id="imageUploadChart" className="w-full h-full"></canvas>
         </div>
