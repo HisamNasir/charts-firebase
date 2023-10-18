@@ -78,6 +78,10 @@ const ImageTableCharts = () => {
   //   window.open(imageUrl, "_blank");
   // };
 
+  const openImageInNewTab = (imageUrl) => {
+    window.open(imageUrl, "_blank");
+  };
+
   const drawBarChart = () => {
     const ctx = document.getElementById('barChart').getContext('2d');
     chartRef.current = new Chart(ctx, {
@@ -85,12 +89,12 @@ const ImageTableCharts = () => {
       data: {
         labels: [
           'Today',
+          '2 Days Ago',
+          '3 Days Ago',
+          '1 Day Ago',
+          '4 Days Ago',
           '6 Days Ago',
           '5 Days Ago',
-          '4 Days Ago',
-          '3 Days Ago',
-          '2 Days Ago',
-          '1 Day Ago'
         ],
         datasets: [
           {
